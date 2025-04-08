@@ -9,5 +9,4 @@ public class Consumidor {
     public void pedirMenu(){
 
     }
-
 }
