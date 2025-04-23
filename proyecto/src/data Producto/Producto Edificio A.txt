@@ -1,7 +1,7 @@
-Bocadillo de jamón y queso (opción sin gluten: pan sin gluten);Bocata de tortilla española (sin gluten: pan sin gluten disponible);Empanada de pollo (versión sin gluten disponible)
+Bocadillo de jamón y queso ;1.50;Bocata de tortilla española ;2.00;Empanada de pollo;2.50
 
-Pollo a la plancha con arroz y ensalada (sin gluten, sin frutos secos);Lentejas estofadas (sin gluten, sin lácteos, sin frutos secos);Pasta a la boloñesa (opción sin gluten con pasta de arroz o maíz)
+Pollo a la plancha con arroz y ensalada ;5.00;Lentejas estofadas;5.00; Pasta a la boloñesa;5.00
 
-Tarta de Santiago (contiene huevo y frutos secos: almendra);Flan de huevo (contiene huevo y leche);Rosquillas (contienen gluten y huevo; puede contener trazas de leche)
+Tarta de Santiago ;3.00; Flan de huevo ;2.50;Rosquillas ;2.00
 
-Agua natural o con gas;Jugo de naranja (sin gluten, sin lácteos);Café (sin gluten, sin lácteos disponible con leche de almendra/soja)
+Agua natural o con gas ;1.00; Jugo de naranja ;1.50; Café; 2.00

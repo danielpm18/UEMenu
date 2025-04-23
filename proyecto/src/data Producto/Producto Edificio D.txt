@@ -1,36 +1,7 @@
-Menú Edificio D (Opciones vegetarianas y veganas)
+Bocadillo de hummus con zanahoria y pepino ;2.20;Panini de queso de cabra con tomate seco ;2.50;Empanada de espinaca y queso ;2.30
 
-Bocadillos y bocatas:
+Pasta al pesto con nueces ;5.00;Hamburguesa de lentejas con papas asadas ;5.00;Arroz frito con tofu y verduras ;5.00
 
-Bocadillo de hummus con zanahoria y pepino (sin gluten con pan especial, sin frutos secos)
+Leche frita ;1.70;Churros con chocolate ;1.80;Pestiños ;1.50
 
-Panini de queso de cabra con tomate seco (sin gluten con pan especial, sin frutos secos, sin mariscos)
-
-Empanada de espinaca y queso (versión sin gluten disponible, sin frutos secos)
-
-
-Platos fuertes (almuerzo):
-
-Pasta al pesto con nueces (opción sin frutos secos con pesto sin nueces, opción sin gluten con pasta especial)
-
-Hamburguesa de lentejas con papas asadas (sin gluten con pan especial, sin frutos secos, sin mariscos)
-
-Arroz frito con tofu y verduras (sin gluten, sin lácteos, sin frutos secos, sin mariscos)
-
-
-Bebidas:
-
-Jugo de frutos rojos (sin gluten, sin lácteos, sin frutos secos, sin mariscos)
-
-Kombucha (sin gluten, sin lácteos, sin frutos secos, sin mariscos)
-
-Café con leche de almendra (sin gluten, sin lácteos, sin frutos secos, sin mariscos)
-
-Postres:
-
-Leche frita (contiene gluten, leche y huevo – sin conservantes)
-
-Churros con chocolate (contienen gluten – sin conservantes; el chocolate puede contener leche)
-
-Pestiños (contienen gluten – sin conservantes; pueden contener miel y trazas de frutos secos)
-
+Jugo de frutos rojos ;1.20;Kombucha ;1.50;Café con leche de almendra ;2.30
