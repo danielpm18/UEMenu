@@ -28,49 +28,7 @@ public class Menu {
         }
     }
 
-    public static void main(String[] args) {
-        while (true) {
-            limpiarPantalla();
-            mostrarCesta();
-            System.out.println("=== Menú Principal ===");
-            System.out.println("1. Ver menús/productos por edificio");
-            System.out.println("2. Filtrar por etiquetas (SG, V, P, C) o excluirlas");
-            System.out.println("3. Finalizar y ver recibo");
-            System.out.print("Selecciona una opción: ");
-            String opcion = scanner.nextLine();
-
-            if (opcion.equals("3")) {
-                mostrarRecibo();
-                break;
-            } else if (opcion.equals("2")) {
-                System.out.print("Escribe una etiqueta (SG, V, P, C): ");
-                String etiqueta = scanner.nextLine().toUpperCase();
-                if (!etiqueta.isEmpty() && !List.of("SG", "V", "P", "C").contains(etiqueta)) {
-                    System.out.println("Etiqueta no válida. Presiona Enter para continuar...");
-                    scanner.nextLine();
-                    continue;
-                }
-
-                System.out.print("¿Quieres incluir (I) o excluir (E) esta etiqueta?: ");
-                String modo = scanner.nextLine().toUpperCase();
-                if (!modo.equals("I") && !modo.equals("E")) {
-                    System.out.println("Modo no válido. Presiona Enter para continuar...");
-                    scanner.nextLine();
-                    continue;
-                }
-
-                boolean excluir = modo.equals("E");
-                mostrarItemsFiltrados(etiqueta, excluir);
-            } else if (opcion.equals("1")) {
-                seleccionarEdificio();
-            } else {
-                System.out.println("Opción no válida. Presiona Enter para continuar...");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    static void seleccionarEdificio() {
+    public static void seleccionarEdificio() {
         System.out.print("Elige un edificio (A-E) o escribe VOLVER: ");
         String edificio = scanner.nextLine().toUpperCase();
         if (edificio.equals("VOLVER")) return;
@@ -264,7 +222,7 @@ public class Menu {
         return lista;
     }
 
-    static void mostrarItemsFiltrados(String filtroEtiqueta, boolean excluir) {
+    public static void mostrarItemsFiltrados(String filtroEtiqueta, boolean excluir) {
         List<Item> filtrados = new ArrayList<>();
         for (String edificio : List.of("A", "B", "C", "D", "E")) {
             for (String tipo : List.of("MENUS", "PRODUCTOS")) {
@@ -319,7 +277,7 @@ public class Menu {
     }
 
 
-    static void mostrarCesta() {
+    public static void mostrarCesta() {
         if (cesta.isEmpty()) {
             System.out.println("Cesta vacía");
         } else {
@@ -332,7 +290,7 @@ public class Menu {
         System.out.println();
     }
 
-    static void mostrarRecibo() {
+    public static void mostrarRecibo() {
         limpiarPantalla();
         System.out.println("\n=== RECIBO FINAL ===");
         for (Item item : cesta) {
@@ -342,7 +300,7 @@ public class Menu {
         System.out.println("\n¡Gracias por usar la app UEMenu!");
     }
 
-    static void limpiarPantalla() {
+    public static void limpiarPantalla() {
         try {
             final String os = System.getProperty("os.name");
             if (os.contains("Windows")) {
