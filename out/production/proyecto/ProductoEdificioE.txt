@@ -1,8 +1,0 @@
-P,V;Pizza vegetal sin gluten;2.50
-C;Sándwich de pollo;2.60
-SG;Smoothie de frutas sin azúcar;2.20
-V;Empanada de espinacas;2.00
-V,SG;Tostada de aguacate;2.30
-P;Mini calzone;2.10
-C;Refresco sin azúcar;1.50
-SG;Agua mineral;1.00

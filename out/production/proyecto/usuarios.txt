@@ -1,3 +1,0 @@
-C;Consumidor;1
-A;Administrador;1
-G;Gerente;1

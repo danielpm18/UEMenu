@@ -1,8 +1,0 @@
-V;Pudding de chía con frutas;2.50
-C,SG;Muslitos de pollo al horno;4.20
-V;Hamburguesa de soja;3.80
-SG;Té verde sin azúcar;1.30
-P;Pizza de champiñones;2.00
-V;Ensalada griega;3.00
-C;Bocadillo de tortilla;2.40
-SG;Fruta cortada;1.50

@@ -1,9 +1,0 @@
-Pasta a la boloñesa,Tarta de Santiago,Zumo de naranja;15.0
-Pollo a la plancha con arroz y ensalada,Flan de huevo,Agua natural o con gas;12.5
-Pollo a la plancha con arroz y ensalada,Flan de huevo,Agua natural o con gas;12.5
-Pollo a la plancha con arroz, flan de huevo, agua;12.5
-Galletas de avena;1.5
-Filete de ternera, ensalada de quinoa, agua;14.2
-Pollo a la plancha con arroz, flan de huevo, agua;12.5
-Empanada de carne;2.8
-Frutas mixtas;10.0
