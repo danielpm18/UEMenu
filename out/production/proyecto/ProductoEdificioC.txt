@@ -1,0 +1,8 @@
+V,SG;Tortilla de patatas sin pan;2.30
+C;Sándwich mixto;2.50
+V;Tarta vegana de chocolate;2.80
+SG;Barrita sin gluten;1.80
+V;Sopa fría de pepino;2.10
+P;Pizza barbacoa en porción;2.20
+SG;Agua de coco;1.90
+V;Manzana orgánica;1.00
