@@ -1,0 +1,4 @@
+P,V;Wrap de vegetales, batido de plátano, galleta de avena;12.80
+C;Pollo al limón con arroz jazmín, ensalada verde, té verde;14.00
+V;Hamburguesa de lentejas, papas al horno, zumo de frutas;13.00
+SG;Pavo asado, puré de patata, bebida isotónica;13.50
