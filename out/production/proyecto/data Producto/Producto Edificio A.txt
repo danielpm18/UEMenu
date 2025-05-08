@@ -1,7 +1,0 @@
-Bocadillo de jamón y queso ;1.50;Bocata de tortilla española ;2.00;Empanada de pollo;2.50
-
-Pollo a la plancha con arroz y ensalada ;5.00;Lentejas estofadas;5.00; Pasta a la boloñesa;5.00
-
-Tarta de Santiago ;3.00; Flan de huevo ;2.50;Rosquillas ;2.00
-
-Agua natural o con gas ;1.00; Jugo de naranja ;1.50; Café; 2.00
