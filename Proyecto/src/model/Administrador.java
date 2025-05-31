@@ -67,7 +67,7 @@ public class Administrador extends Consumidor {
             limpiarPantalla();
             System.out.println("=== Editar " + tipo + " del edificio " + edificio + " ===");
             for (int i = 0; i < productos.size(); i++) {
-                System.out.println(i + ": " + productos.get(i));
+                System.out.println((i+1) + ": " + productos.get(i));
             }
             System.out.println();
             System.out.println("A - Añadir nuevo | M - Modificar | E - Eliminar | S - Salir");
@@ -103,74 +103,142 @@ public class Administrador extends Consumidor {
 	            	    }
 	            	}
 
-	                System.out.print("Nombre del producto: ");
-	                String nombre = scanner.nextLine();
+	            	String nombre = "";
+	            	while (nombre.isEmpty()) {
+	            	    System.out.print("Nombre del producto: ");
+	            	    nombre = scanner.nextLine().trim();
+	            	    if (nombre.isEmpty()) {
+	            	        System.out.println("El nombre no puede estar vacío. Inténtalo de nuevo.");
+	            	    }
+	            	}
+
 	
-	                System.out.print("Precio (usa punto decimal o coma): ");
-	                String precioStr = scanner.nextLine().replace(",", ".");
-	                double precio = Double.parseDouble(precioStr);
+	            	double precio = -1;
+	            	while (precio < 0) {
+	            	    System.out.print("Precio (usa punto o coma): ");
+	            	    String precioStr = scanner.nextLine().replace(",", ".");
+	            	    try {
+	            	        precio = Double.parseDouble(precioStr);
+	            	        if (precio < 0) {
+	            	            System.out.println("El precio no puede ser negativo. Inténtalo de nuevo.");
+	            	        }
+	            	    } catch (NumberFormatException e) {
+	            	        System.out.println("Por favor, introduce un número válido.");
+	            	    }
+	            	}
+
 	
 	                productos.add(new Producto(edificio, tipo, finalEtiquetas, nombre, precio));
 	             }
 
-                case "M" -> {
-                    System.out.print("Número del producto a modificar: ");
-                    int idx = Integer.parseInt(scanner.nextLine());
-                    if (idx >= 0 && idx < productos.size()) {
-                        Producto p = productos.get(idx);
-                        System.out.println("Modificando: " + p);
-                        
-                        while (true) {
-                            System.out.print("Nuevas etiquetas válidas (SG,V,P,C) (ENTER para mantener): ");
-                            String nuevasEtiquetas = scanner.nextLine().toUpperCase();
-                            if (nuevasEtiquetas.isEmpty()) break;
+	            case "M" -> {
+	                int idx = -1;
+	                while (true) {
+	                    System.out.print("Número del producto a modificar: ");
+	                    String entrada = scanner.nextLine();
+	                    try {
+	                        idx = Integer.parseInt(entrada.trim()) - 1;  // Recuerda: el usuario ve los productos desde 1, restamos 1
+	                        if (idx >= 0 && idx < productos.size()) {
+	                            break;  // Número correcto, salimos del bucle
+	                        } else {
+	                        	System.out.println("");
+	                            System.out.println("Número inválido. Inténtalo de nuevo.");
+	                        }
+	                    } catch (NumberFormatException e) {
+	                    	System.out.println("");
+	                        System.out.println("Por favor, introduce un número válido.");
+	                    }
+	                }
 
-                            String[] etiquetasArray = nuevasEtiquetas.split(",");
-                            boolean todasValidas = true;
+	                Producto p = productos.get(idx);
+	                System.out.println("");
+	                System.out.println("Modificando: " + p);
 
-                            for (String e : etiquetasArray) {
-                                if (!ETIQUETAS_VALIDAS.contains(e.trim())) {
-                                	System.out.println("");
-                                    System.out.println("❌ La etiqueta '" + e.trim() + "' no es válida. Inténtalo de nuevo.");
-                                    todasValidas = false;
-                                    break;
-                                }
-                            }
+	                // Etiquetas
+	                while (true) {
+	                    System.out.print("Nuevas etiquetas válidas (SG,V,P,C) (ENTER para mantener): ");
+	                    String nuevasEtiquetas = scanner.nextLine().toUpperCase();
+	                    if (nuevasEtiquetas.isEmpty()) break;
 
-                            if (todasValidas) {
-                                Set<String> etiquetaSet = new LinkedHashSet<>();
-                                for (String e : etiquetasArray) {
-                                    etiquetaSet.add(e.trim());
-                                }
-                                String finalEtiquetas = String.join(",", etiquetaSet);
-                                p = new Producto(p.getEdificio(), p.getCategoria(), finalEtiquetas, p.getNombre(), p.getPrecio());
-                                break;
-                            }
-                        }
+	                    String[] etiquetasArray = nuevasEtiquetas.split(",");
+	                    Set<String> etiquetaSet = new LinkedHashSet<>();
+	                    boolean todasValidas = true;
 
-                        System.out.print("Nuevo nombre (ENTER para mantener): ");
-                        String nuevoNombre = scanner.nextLine();
-                        if (!nuevoNombre.isEmpty()) p = new Producto(p.getEdificio(), p.getCategoria(), p.getEtiquetas(), nuevoNombre, p.getPrecio());
-                        
-                        System.out.print("Nuevo precio (ENTER para mantener): ");
-                        String nuevoPrecio = scanner.nextLine().replace(",", ".");
-                        if (!nuevoPrecio.isEmpty()) {
-                            try {
-                                double precio = Double.parseDouble(nuevoPrecio);
-                                p = new Producto(p.getEdificio(), p.getCategoria(), p.getEtiquetas(), p.getNombre(), precio);
-                            } catch (NumberFormatException ignored) {}
-                        }
+	                    for (String e : etiquetasArray) {
+	                        e = e.trim();
+	                        if (!ETIQUETAS_VALIDAS.contains(e)) {
+	                            System.out.println("❌ La etiqueta '" + e + "' no es válida. Inténtalo de nuevo.");
+	                            todasValidas = false;
+	                            break;
+	                        }
+	                        etiquetaSet.add(e);
+	                    }
 
-                        productos.set(idx, p);
-                    }
-                }
-                case "E" -> {
-                    System.out.print("Número del producto a eliminar: ");
-                    int idx = Integer.parseInt(scanner.nextLine());
-                    if (idx >= 0 && idx < productos.size()) {
-                        productos.remove(idx);
-                    }
-                }
+	                    if (todasValidas) {
+	                        String finalEtiquetas = String.join(",", etiquetaSet);
+	                        p = new Producto(p.getEdificio(), p.getCategoria(), finalEtiquetas, p.getNombre(), p.getPrecio());
+	                        break;
+	                    }
+	                }
+
+	                // Nombre
+	                while (true) {
+	                    System.out.print("Nuevo nombre (ENTER para mantener): ");
+	                    String nuevoNombre = scanner.nextLine().trim();
+	                    if (nuevoNombre.isEmpty()) break;
+	                    if (nuevoNombre.length() < 1) {
+	                        System.out.println("El nombre no puede estar vacío. Inténtalo de nuevo.");
+	                    } else {
+	                        p = new Producto(p.getEdificio(), p.getCategoria(), p.getEtiquetas(), nuevoNombre, p.getPrecio());
+	                        break;
+	                    }
+	                }
+
+	                // Precio
+	                while (true) {
+	                    System.out.print("Nuevo precio (ENTER para mantener): ");
+	                    String nuevoPrecio = scanner.nextLine().replace(",", ".").trim();
+	                    if (nuevoPrecio.isEmpty()) break;
+	                    try {
+	                        double precio = Double.parseDouble(nuevoPrecio);
+	                        if (precio < 0) {
+	                            System.out.println("El precio no puede ser negativo. Inténtalo de nuevo.");
+	                        } else {
+	                            p = new Producto(p.getEdificio(), p.getCategoria(), p.getEtiquetas(), p.getNombre(), precio);
+	                            break;
+	                        }
+	                    } catch (NumberFormatException e) {
+	                        System.out.println("Por favor, introduce un número válido.");
+	                    }
+	                }
+
+	                productos.set(idx, p);
+	                System.out.println("Producto modificado correctamente.");
+	            }
+
+	            case "E" -> {
+	                int idx = -1;
+	                while (true) {
+	                    System.out.print("Número del producto a eliminar: ");
+	                    String entrada = scanner.nextLine();
+	                    try {
+	                        idx = Integer.parseInt(entrada.trim()) - 1;
+	                        if (idx >= 0 && idx < productos.size()) {
+	                            break;
+	                        } else {
+	                        	System.out.println("");
+	                            System.out.println("Número inválido. Inténtalo de nuevo.");
+	                        }
+	                    } catch (NumberFormatException e) {
+	                    	System.out.println("");
+	                        System.out.println("Por favor, introduce un número válido.");
+	                    }
+	                }
+
+	                productos.remove(idx);
+	                System.out.println("");
+	                System.out.println("Producto eliminado correctamente.");
+	            }
                 case "S" -> {
                     Producto.escribirEnArchivo(archivo, productos);
                     System.out.println("Cambios guardados.");

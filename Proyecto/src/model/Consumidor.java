@@ -76,7 +76,7 @@ public class Consumidor extends Usuario {
                     mostrarCesta();
                     System.out.println("Edificio " + edificio + " - " + tipo);
                     for (int i = 0; i < items.size(); i++) {
-                        System.out.println(i + ": " + items.get(i));
+                        System.out.println((i + 1 )+ ": " + items.get(i));
                     }
                     System.out.println("");
                     System.out.println("VOLVER - Volver atrás");
@@ -92,7 +92,7 @@ public class Consumidor extends Usuario {
                     }
 
                     try {
-                        int idx = Integer.parseInt(entrada.trim());
+                        int idx = Integer.parseInt(entrada.trim())-1;
                         if (idx >= 0 && idx < items.size()) {
                             cesta.añadir(items.get(idx));
                         }
@@ -144,7 +144,7 @@ public class Consumidor extends Usuario {
             mostrarCesta();
             System.out.println("=== Resultados filtrados para: " + modo + " -> " + etiqueta + " ===");
             for (int i = 0; i < filtrados.size(); i++) {
-                System.out.println(i + ": " + filtrados.get(i));
+                System.out.println((i + 1) + ": " + filtrados.get(i));
             }
             System.out.println("VOLVER - Volver atrás");
             System.out.println("FINALIZAR - Terminar y mostrar recibo");
@@ -158,7 +158,7 @@ public class Consumidor extends Usuario {
             }
 
             try {
-                int idx = Integer.parseInt(entrada.trim());
+                int idx = Integer.parseInt(entrada.trim())-1;
                 if (idx >= 0 && idx < filtrados.size()) {
                     cesta.añadir(filtrados.get(idx));
                 }
