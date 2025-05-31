@@ -1,0 +1,8 @@
+SG;Ensalada de quinoa;3.5
+V;Sándwich de hummus y tomate seco;2.9
+C;Yogur natural;1.0
+P,V;Mini pizza vegetal;2.4
+SG;Agua con gas;1.0
+V;Batido de fresas con avena;2.0
+C;Bocata de atún;2.6
+V;Infusión de hierbas;1.2

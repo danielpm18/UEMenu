@@ -1,0 +1,8 @@
+V,SG;Bocadillo vegetal sin gluten;2.5
+C;Empanada de carne;2.8
+V;Galletas de avena;1.5
+SG;Zumo natural de naranja;1.8
+P;Pizza margarita en porción;2.0
+C;Croissant de jamón y queso;2.7
+V,SG;Barrita energética casera;2.2
+C;Café solo;1.2
