@@ -20,19 +20,21 @@ public class Gerente extends Administrador {
             mostrarCesta();
             System.out.println("=== Menú Gerente ===");
             System.out.println("1. Ver menús/productos por edificio");
-            System.out.println("2. Filtrar por etiquetas");
-            System.out.println("3. Editar productos/menús");
-            System.out.println("4. Ver estadísticas de ventas");
-            System.out.println("5. Finalizar y ver recibo");
+            System.out.println("2. Eliminar producto de la cesta");
+            System.out.println("3. Filtrar por etiquetas");
+            System.out.println("4. Editar productos/menús");
+            System.out.println("5. Ver estadísticas de ventas");
+            System.out.println("6. Finalizar y ver recibo");
             System.out.print("Selecciona una opción: ");
             String opcion = scanner.nextLine();
 
             switch (opcion) {
                 case "1" -> seleccionarEdificio();
-                case "2" -> filtrarPorEtiqueta();
-                case "3" -> editarArchivos();
-                case "4" -> Estadistica.mostrarEstadisticas();
-                case "5" -> {
+                case "2" -> cesta.eliminarProducto(scanner);
+                case "3" -> filtrarPorEtiqueta();
+                case "4" -> editarArchivos();
+                case "5" -> Estadistica.mostrarEstadisticas();
+                case "6" -> {
                     mostrarRecibo();
                     return;
                 }

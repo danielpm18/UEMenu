@@ -26,15 +26,17 @@ public class Consumidor extends Usuario {
             mostrarCesta();
             System.out.println("=== Menú Principal ===");
             System.out.println("1. Ver menús/productos por edificio");
-            System.out.println("2. Filtrar por etiquetas (SG, V, P, C) o excluirlas");
-            System.out.println("3. Finalizar y ver recibo");
+            System.out.println("2. Eliminar producto de la cesta");
+            System.out.println("3. Filtrar por etiquetas (SG, V, P, C) o excluirlas");
+            System.out.println("4. Finalizar y ver recibo");
             System.out.print("Selecciona una opción: ");
             String opcion = scanner.nextLine();
 
             switch (opcion) {
                 case "1" -> seleccionarEdificio();
-                case "2" -> filtrarPorEtiqueta();
-                case "3" -> {
+                case "2" -> cesta.eliminarProducto(scanner);
+                case "3" -> filtrarPorEtiqueta();
+                case "4" ->{
                     mostrarRecibo();
                     return;
                 }
@@ -80,12 +82,14 @@ public class Consumidor extends Usuario {
                     }
                     System.out.println("");
                     System.out.println("VOLVER - Volver atrás");
+                    System.out.println("MENU - Volver al menú principal");
                     System.out.println("FINALIZAR - Terminar y mostrar recibo");
                     System.out.println("");
                     System.out.print("Elige un número o escribe VOLVER/FINALIZAR: ");
                     String entrada = scanner.nextLine().toUpperCase();
 
                     if (entrada.equals("VOLVER")) break;
+                    if (entrada.equals("MENU")) return;
                     if (entrada.equals("FINALIZAR")) {
                         mostrarRecibo();
                         System.exit(0);

@@ -25,13 +25,14 @@ public class Cesta {
             System.out.println("Cesta vacía.");
         } else {
             System.out.println("=== CESTA ===");
-            for (Producto item : productos) {
-                System.out.println("- " + item);
+            for (int i = 0; i < productos.size(); i++) {
+                System.out.println((i + 1) + ": " + productos.get(i));
             }
             System.out.printf("TOTAL: %.2f€%n", total);
         }
         System.out.println();
     }
+
 
     public void mostrarReciboYGuardar() {
         limpiarPantalla();
@@ -52,6 +53,44 @@ public class Cesta {
 
         System.out.println("\n¡Gracias por usar la app de menús!");
     }
+
+    public void eliminarProducto(Scanner scanner) {
+        if (productos.isEmpty()) {
+            System.out.println("La cesta está vacía.");
+            return;
+        }
+
+        while (true) {
+        	limpiarPantalla();
+            mostrarContenido();
+            System.out.print("Número del producto a eliminar (o escribe VOLVER para salir): ");
+            String entrada = scanner.nextLine().trim().toUpperCase();
+
+            if (entrada.equals("VOLVER")) {
+                System.out.println("Saliendo de la eliminación de productos...");
+                break;
+            }
+
+            try {
+                int idx = Integer.parseInt(entrada) - 1;
+                if (idx >= 0 && idx < productos.size()) {
+                    Producto eliminado = productos.remove(idx);
+                    total -= eliminado.getPrecio();
+                    System.out.println("✅ Producto eliminado de la cesta: " + eliminado.getNombre());
+                } else {
+                    System.out.println("Número inválido. Inténtalo de nuevo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, introduce un número válido o escribe VOLVER.");
+            }
+
+            if (productos.isEmpty()) {
+                System.out.println("✅ La cesta está vacía.");
+                break;
+            }
+        }
+    }
+
 
     private void limpiarPantalla() {
         for (int i = 0; i < 30; i++) System.out.println();
