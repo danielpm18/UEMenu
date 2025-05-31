@@ -41,14 +41,24 @@ public class Administrador extends Consumidor {
     }
 
     protected void editarArchivos() {
-        System.out.print("Selecciona edificio (A-E) o VOLVER: ");
-        String edificio = scanner.nextLine().toUpperCase();
-        if (edificio.equals("VOLVER")) return;
-        if (!List.of("A", "B", "C", "D", "E").contains(edificio)) return;
+    	String edificio;
+    	while (true) {
+    		limpiarPantalla();
+    	    System.out.print("Selecciona edificio (A-E) o VOLVER: ");
+    	    edificio = scanner.nextLine().toUpperCase();
+    	    if (edificio.equals("VOLVER")) return;
+    	    if (List.of("A", "B", "C", "D", "E").contains(edificio)) break;
+    	}
 
-        System.out.print("¿Editar MENUS o PRODUCTOS?: ");
-        String tipo = scanner.nextLine().toUpperCase();
-        if (!tipo.equals("MENUS") && !tipo.equals("PRODUCTOS")) return;
+    	String tipo;
+    	while (true) {
+    		limpiarPantalla();
+    		System.out.println("Edificio " + edificio);
+    	    System.out.print("¿Editar MENUS o PRODUCTOS?: ");
+    	    tipo = scanner.nextLine().toUpperCase();
+    	    if (tipo.equals("MENUS") || tipo.equals("PRODUCTOS")) break;
+    	}
+
 
         String archivo = "Proyecto/Data/" + (tipo.equals("MENUS") ? "MenuEdificio" : "ProductoEdificio") + edificio + ".txt";
         List<Producto> productos = Producto.leerDesdeArchivo(archivo, edificio, tipo);
@@ -59,36 +69,91 @@ public class Administrador extends Consumidor {
             for (int i = 0; i < productos.size(); i++) {
                 System.out.println(i + ": " + productos.get(i));
             }
+            System.out.println();
             System.out.println("A - Añadir nuevo | M - Modificar | E - Eliminar | S - Salir");
             System.out.print("Elige opción: ");
             String opcion = scanner.nextLine().toUpperCase();
 
             switch (opcion) {
-                case "A" -> {
-                    System.out.print("Nombre: ");
-                    String nombre = scanner.nextLine();
-                    System.out.print("Etiquetas (separadas por coma): ");
-                    String etiquetas = scanner.nextLine();
-                    System.out.print("Precio: ");
-                    double precio = Double.parseDouble(scanner.nextLine());
-                    productos.add(new Producto(edificio, tipo, etiquetas, nombre, precio));
-                }
+	            case "A" -> {
+	            	String finalEtiquetas;
+	            	while (true) {
+	            	    System.out.println("Etiquetas válidas: SG, V, P, C (separadas por coma)");
+	            	    System.out.print("Etiquetas: ");
+	            	    String etiquetasInput = scanner.nextLine().toUpperCase();
+	            	    String[] etiquetasArray = etiquetasInput.split(",");
+	            	    boolean todasValidas = true;
+
+	            	    for (String e : etiquetasArray) {
+	            	        if (!ETIQUETAS_VALIDAS.contains(e.trim())) {
+	            	        	System.out.println("");
+	            	            System.out.println("❌ La etiqueta '" + e.trim() + "' no es válida. Inténtalo de nuevo.");
+	            	            todasValidas = false;
+	            	            break;
+	            	        }
+	            	    }
+
+	            	    if (todasValidas) {
+	            	        Set<String> etiquetaSet = new LinkedHashSet<>();  // Usamos LinkedHashSet para mantener el orden
+	            	        for (String e : etiquetasArray) {
+	            	            etiquetaSet.add(e.trim());
+	            	        }
+	            	        finalEtiquetas = String.join(",", etiquetaSet);
+	            	        break;
+	            	    }
+	            	}
+
+	                System.out.print("Nombre del producto: ");
+	                String nombre = scanner.nextLine();
+	
+	                System.out.print("Precio (usa punto decimal o coma): ");
+	                String precioStr = scanner.nextLine().replace(",", ".");
+	                double precio = Double.parseDouble(precioStr);
+	
+	                productos.add(new Producto(edificio, tipo, finalEtiquetas, nombre, precio));
+	             }
+
                 case "M" -> {
                     System.out.print("Número del producto a modificar: ");
                     int idx = Integer.parseInt(scanner.nextLine());
                     if (idx >= 0 && idx < productos.size()) {
                         Producto p = productos.get(idx);
                         System.out.println("Modificando: " + p);
+                        
+                        while (true) {
+                            System.out.print("Nuevas etiquetas válidas (SG,V,P,C) (ENTER para mantener): ");
+                            String nuevasEtiquetas = scanner.nextLine().toUpperCase();
+                            if (nuevasEtiquetas.isEmpty()) break;
+
+                            String[] etiquetasArray = nuevasEtiquetas.split(",");
+                            boolean todasValidas = true;
+
+                            for (String e : etiquetasArray) {
+                                if (!ETIQUETAS_VALIDAS.contains(e.trim())) {
+                                	System.out.println("");
+                                    System.out.println("❌ La etiqueta '" + e.trim() + "' no es válida. Inténtalo de nuevo.");
+                                    todasValidas = false;
+                                    break;
+                                }
+                            }
+
+                            if (todasValidas) {
+                                Set<String> etiquetaSet = new LinkedHashSet<>();
+                                for (String e : etiquetasArray) {
+                                    etiquetaSet.add(e.trim());
+                                }
+                                String finalEtiquetas = String.join(",", etiquetaSet);
+                                p = new Producto(p.getEdificio(), p.getCategoria(), finalEtiquetas, p.getNombre(), p.getPrecio());
+                                break;
+                            }
+                        }
+
                         System.out.print("Nuevo nombre (ENTER para mantener): ");
                         String nuevoNombre = scanner.nextLine();
                         if (!nuevoNombre.isEmpty()) p = new Producto(p.getEdificio(), p.getCategoria(), p.getEtiquetas(), nuevoNombre, p.getPrecio());
-
-                        System.out.print("Nuevas etiquetas (ENTER para mantener): ");
-                        String nuevasEtiquetas = scanner.nextLine();
-                        if (!nuevasEtiquetas.isEmpty()) p = new Producto(p.getEdificio(), p.getCategoria(), nuevasEtiquetas, p.getNombre(), p.getPrecio());
-
+                        
                         System.out.print("Nuevo precio (ENTER para mantener): ");
-                        String nuevoPrecio = scanner.nextLine();
+                        String nuevoPrecio = scanner.nextLine().replace(",", ".");
                         if (!nuevoPrecio.isEmpty()) {
                             try {
                                 double precio = Double.parseDouble(nuevoPrecio);
