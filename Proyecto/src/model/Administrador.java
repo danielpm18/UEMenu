@@ -2,18 +2,21 @@ package model;
 
 import java.io.*;
 import java.util.*;
-
+//Clase Administrador: extiende la clase Consumidor. Hereda sus funciones y añade la capacidad de editar productos y menús.
 public class Administrador extends Consumidor {
-
+	// Constructor del Administrador. Recibe nombre y contraseña, y los pasa al constructor de la clase padre (Consumidor).
     public Administrador(String nombre, String contrasena) {
         super(nombre, contrasena);
     }
-
+ 
+    // Devuelve el tipo de usuario: en este caso "Administrador". Esto se usa para mostrar el rol del usuario al iniciar sesión.
     @Override
     public String getTipo() {
         return "Administrador";
     }
 
+    // muestra el menú principal del Administrador en bucle hasta que decida finalizar.
+    // Permite ver menús/productos, eliminar de la cesta, filtrar, editar productos/menús o finalizar
     @Override
     public void iniciar() {
         while (true) {
@@ -41,8 +44,10 @@ public class Administrador extends Consumidor {
             }
         }
     }
-
+    // Método para editar archivos de menús y productos.
+    // Pide el edificio y el tipo de compra (MENUS o PRODUCTOS), carga los datos, y permite añadir, modificar o eliminar productos.
     protected void editarArchivos() {
+    	// Bucle para pedir el edificio (A-E)
     	String edificio;
     	while (true) {
     		limpiarPantalla();
@@ -52,6 +57,7 @@ public class Administrador extends Consumidor {
     	    if (List.of("A", "B", "C", "D", "E").contains(edificio)) break;
     	}
 
+    	// Bucle para pedir si quiere editar MENUS o PRODUCTOS
     	String tipo;
     	while (true) {
     		limpiarPantalla();
@@ -61,10 +67,12 @@ public class Administrador extends Consumidor {
     	    if (tipo.equals("MENUS") || tipo.equals("PRODUCTOS")) break;
     	}
 
-
+    	// Carga el archivo correspondiente (según edificio y tipo)
         String archivo = "Proyecto/Data/" + (tipo.equals("MENUS") ? "MenuEdificio" : "ProductoEdificio") + edificio + ".txt";
         List<Producto> productos = Producto.leerDesdeArchivo(archivo, edificio, tipo);
 
+        // Bucle para mostrar y editar productos: permite añadir, modificar o eliminar.
+        // Muestra los productos y un menú de opciones hasta que elija salir (S).
         while (true) {
             limpiarPantalla();
             System.out.println("=== Editar " + tipo + " del edificio " + edificio + " ===");
@@ -77,6 +85,8 @@ public class Administrador extends Consumidor {
             String opcion = scanner.nextLine().toUpperCase();
 
             switch (opcion) {
+         // Opción A: Añadir un nuevo producto al archivo.
+         // Pide las etiquetas (con validación), el nombre (no puede estar vacío) y el precio (número válido y no negativo).
 	            case "A" -> {
 	            	String finalEtiquetas;
 	            	while (true) {
@@ -132,7 +142,8 @@ public class Administrador extends Consumidor {
 	
 	                productos.add(new Producto(edificio, tipo, finalEtiquetas, nombre, precio));
 	             }
-
+	            
+	            // Opción M: Modificar un producto existente. Pide el número, luego permite editar etiquetas, nombre y precio.
 	            case "M" -> {
 	                int idx = -1;
 	                while (true) {
@@ -218,6 +229,7 @@ public class Administrador extends Consumidor {
 	                System.out.println("Producto modificado correctamente.");
 	            }
 
+	            // Opción E: Eliminar un producto de la lista. Pide el número, valida la entrada, y elimina.
 	            case "E" -> {
 	                int idx = -1;
 	                while (true) {
@@ -241,6 +253,8 @@ public class Administrador extends Consumidor {
 	                System.out.println("");
 	                System.out.println("Producto eliminado correctamente.");
 	            }
+	            
+	         // Opción S: Guarda los cambios en el archivo de productos/menús y sale de la edición.
                 case "S" -> {
                     Producto.escribirEnArchivo(archivo, productos);
                     System.out.println("Cambios guardados.");

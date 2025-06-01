@@ -3,4 +3,3 @@ C;Pasta a la boloñesa, tarta de Santiago, zumo de naranja;15.0
 SG;Ensalada mixta, yogur natural, agua con gas;11.0
 V;Curry de verduras, fruta fresca, infusión;13.2
 SG,V;Frutas mixtas;10.0
-V;Prueba;2.0

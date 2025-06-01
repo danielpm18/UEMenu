@@ -2,23 +2,29 @@ package model;
 
 import java.io.*;
 import java.util.*;
-
+//Clase Consumidor: representa a un usuario consumidor normal (sin permisos de edición).
+//Extiende a Usuario e incluye funcionalidades como ver menús, filtrar productos, añadir a la cesta, etc.
 public class Consumidor extends Usuario {
 
+	// Scanner para leer entradas del usuario, cesta del usuario y lista de etiquetas válidas para filtrar productos.
     protected static Scanner scanner = new Scanner(System.in);
     protected Cesta cesta = new Cesta();
     protected static final List<String> ETIQUETAS_VALIDAS = List.of("SG", "V", "P", "C");
 
 
+    // Constructor de la clase Consumidor: inicializa el nombre de usuario y la contraseña.
     public Consumidor(String nombre, String contrasena) {
         super(nombre, contrasena);
     }
 
+    // Método que devuelve el tipo de usuario (Consumidor).
     @Override
     public String getTipo() {
         return "Consumidor";
     }
 
+    // Método principal: muestra el menú del usuario consumidor y permite navegar por las opciones.
+    // Opciones: ver menús/productos, eliminar de la cesta, filtrar por etiquetas, o finalizar y ver recibo.
     @Override
     public void iniciar() {
         while (true) {
@@ -45,6 +51,8 @@ public class Consumidor extends Usuario {
         }
     }
 
+    // Método para seleccionar un edificio (A-E) y luego ver MENUS o PRODUCTOS dentro de ese edificio.
+    // Permite ver la lista de productos, añadir a la cesta, volver o salir.
     protected void seleccionarEdificio() {
         while (true) {
             limpiarPantalla();
@@ -107,6 +115,8 @@ public class Consumidor extends Usuario {
     }
 
 
+    // Método para filtrar los productos por una etiqueta (SG, V, P, C) e incluir o excluir esa etiqueta.
+    // Permite seleccionar productos filtrados y añadirlos a la cesta.
     protected void filtrarPorEtiqueta() {
     	String etiqueta;
     	while (true) {
@@ -170,17 +180,19 @@ public class Consumidor extends Usuario {
         }
     }
 
+    // Muestra el contenido de la cesta del usuario (llama al método mostrarContenido() de Cesta).
     protected void mostrarCesta() {
         cesta.mostrarContenido();
     }
 
 
+    // Muestra el recibo final y guarda las compras en archivo de ventas (usa el método mostrarReciboYGuardar() de Cesta).
     protected void mostrarRecibo() {
         cesta.mostrarReciboYGuardar();
     }
 
 
-
+    // Método para limpiar la pantalla (simula una pantalla nueva imprimiendo 40 líneas en blanco).
     protected void limpiarPantalla() {
         for (int i = 0; i < 40; i++) System.out.println();
     }

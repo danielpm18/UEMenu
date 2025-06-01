@@ -3,23 +3,32 @@ package model;
 import java.io.*;
 import java.util.*;
 
+//Clase Cesta: representa la "cesta" de compra del usuario.
+//Permite añadir productos, verlos, eliminarlos y generar un recibo.
 public class Cesta {
+	
+	// Lista de productos en la cesta y el total acumulado de precios.
     private List<Producto> productos = new ArrayList<>();
     private double total = 0.0;
 
+    // Método para añadir un producto a la cesta. Añade el producto a la lista y actualiza el total.
     public void añadir(Producto producto) {
         productos.add(producto);
         total += producto.getPrecio();
     }
 
+    // Devuelve la lista de productos en la cesta (puede usarse para otras funciones si hace falta).
     public List<Producto> getProductos() {
         return productos;
     }
 
+    // Devuelve el total de la cesta (la suma de los precios de todos los productos).
     public double getTotal() {
         return total;
     }
 
+    // Muestra el contenido de la cesta: cada producto con su número de orden y el total al final.
+    // Si la cesta está vacía, lo indica.
     public void mostrarContenido() {
         if (productos.isEmpty()) {
             System.out.println("Cesta vacía.");
@@ -34,6 +43,7 @@ public class Cesta {
     }
 
 
+    // Muestra un recibo final con los productos y el total, y guarda los datos de la venta en 'ventas.txt'.
     public void mostrarReciboYGuardar() {
         limpiarPantalla();
         System.out.println("\n=== RECIBO FINAL ===");
@@ -54,6 +64,7 @@ public class Cesta {
         System.out.println("\n¡Gracias por usar la app de menús!");
     }
 
+    // Permite eliminar productos de la cesta uno por uno hasta que el usuario escriba 'VOLVER'.
     public void eliminarProducto(Scanner scanner) {
         if (productos.isEmpty()) {
             System.out.println("La cesta está vacía.");
@@ -91,8 +102,8 @@ public class Cesta {
         }
     }
 
-
+    // Método para limpiar la pantalla: imprime 40 líneas en blanco para simular una pantalla limpia.
     private void limpiarPantalla() {
-        for (int i = 0; i < 30; i++) System.out.println();
+        for (int i = 0; i < 40; i++) System.out.println();
     }
 }
